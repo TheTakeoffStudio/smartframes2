@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Frameworks – Premium Granite Door & Window Frames | Hyderabad</title>
+  <meta name="description" content="Smart Frameworks offers luxury granite door and window frames in Hyderabad. Waterproof, termite-proof, crack-resistant. Built to last generations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ========================
+       CSS VARIABLES & RESET
+    ======================== */
+    :root {
+      --black:        #080808;
+      --charcoal:     #111111;
+      --charcoal-mid: #1a1a1a;
+      --charcoal-lt:  #242424;
+      --gold:         #c9a84c;
+      --gold-lt:      #e3c87e;
+      --gold-dk:      #9a7730;
+      --white:        #f5f0ea;
+      --white-dim:    rgba(245,240,234,0.75);
+      --white-faint:  rgba(245,240,234,0.10);
+      --glass-bg:     rgba(20,18,14,0.65);
+      --glass-border: rgba(201,168,76,0.18);
+      --shadow-gold:  0 4px 40px rgba(201,168,76,0.12);
+      --shadow-deep:  0 24px 80px rgba(0,0,0,0.7);
+      --radius:       12px;
+      --radius-lg:    20px;
+      --nav-h:        68px;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-title:   'Playfair Display', serif;
+      --font-body:    'Outfit', sans-serif;
+      --transition:   0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { text-decoration: none; color: inherit; }
+    ul  { list-style: none; }
+
+    /* ========================
+       LOADING SCREEN
+    ======================== */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 20px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .loader-bar-wrap {
+      width: 160px; height: 2px;
+      background: var(--charcoal-lt);
+      border-radius: 2px; overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt));
+      width: 0;
+      animation: loadBar 1.8s ease forwards;
+    }
+    @keyframes loadBar   { to { width: 100%; } }
+    @keyframes pulse     { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ========================
+       UTILITIES
+    ======================== */
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+    }
+    .gold-span { color: var(--gold); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 60px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      min-height: 54px;
+      white-space: nowrap;
+      touch-action: manipulation;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-dk), var(--gold-lt), var(--gold-dk));
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+      color: var(--black);
+    }
+    .btn-gold:hover, .btn-gold:active {
+      background-position: 100% 50%;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-outline:hover, .btn-outline:active {
+      background: rgba(201,168,76,0.1);
+      transform: translateY(-2px);
+    }
+    .btn-green {
+      background: linear-gradient(135deg, #075e54, #128c7e);
+      color: #fff;
+    }
+    .btn-green:hover, .btn-green:active {
+      background: linear-gradient(135deg, #128c7e, #25d366);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.25);
+    }
+    .btn-insta {
+      background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+      color: #fff;
+    }
+    .btn-insta:hover, .btn-insta:active {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(193,53,132,0.35);
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* gold divider */
+    .gold-divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt));
+      border-radius: 2px;
+      margin: 14px 0 28px;
+    }
+
+    /* ========================
+       NAVBAR
+    ======================== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid var(--glass-border);
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(10,9,6,0.92);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+    .nav-logo span { color: var(--white); font-weight: 300; }
+
+    .nav-links {
+      display: none;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      transition: color 0.3s;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      display: none;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px; height: 18px;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+      border: none;
+      z-index: 1010;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: var(--transition);
+      transform-origin: left center;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(1px, -1px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(1px, 1px); }
+
+    /* Mobile Menu */
+    #mobile-menu {
+      position: fixed; inset: 0;
+      z-index: 999;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(30px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 36px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #mobile-menu.open { opacity: 1; visibility: visible; }
+    #mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+      transition: color 0.3s;
+    }
+    #mobile-menu a:hover { color: var(--gold); }
+    .menu-social {
+      display: flex; gap: 24px; margin-top: 12px;
+    }
+    .menu-social a {
+      font-size: 1.3rem !important;
+      color: var(--gold) !important;
+    }
+
+    /* ========================
+       HERO SECTION
+    ======================== */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(160deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.40) 50%, rgba(0,0,0,0.82) 100%),
+        url('https://granitedoorframe.com/wp-content/uploads/2024/09/freepik_br_a9f31701-94a5-4390-ad1c-0607eb534ee1.png') center/cover no-repeat;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    #hero.loaded .hero-bg { transform: scale(1); }
+
+    /* granite texture overlay */
+    .hero-texture {
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E") repeat;
+      pointer-events: none; mix-blend-mode: overlay; opacity: 0.5;
+    }
+    .hero-accent {
+      position: absolute; right: -100px; top: 10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding-top: calc(var(--nav-h) + 30px);
+      padding-bottom: 60px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .hero-badge i { font-size: 0.65rem; }
+
+    .hero-h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2.6rem, 10vw, 6rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .hero-h1 .line-gold {
+      display: block;
+      background: linear-gradient(135deg, var(--gold-dk), var(--gold-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 3.5vw, 1.55rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white-dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--gold);
+      font-size: 0.68rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: bounce 2.2s ease-in-out infinite;
+    }
+    .scroll-indicator i { font-size: 1rem; }
+    @keyframes bounce {
+      0%,100%{ transform: translateX(-50%) translateY(0); }
+      50%    { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ========================
+       BENEFITS SECTION
+    ======================== */
+    #benefits {
+      padding: 90px 0;
+      background: var(--charcoal);
+      position: relative; overflow: hidden;
+    }
+    #benefits::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .benefits-header { margin-bottom: 52px; }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .benefit-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .benefit-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .benefit-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .benefit-desc {
+      font-size: 0.86rem;
+      color: var(--white-dim);
+      line-height: 1.65;
+    }
+
+    /* ========================
+       PRODUCTS SECTION
+    ======================== */
+    #products {
+      padding: 90px 0;
+      background: var(--black);
+      position: relative;
+    }
+    .products-header { margin-bottom: 52px; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      background: var(--charcoal-lt);
+    }
+    .product-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+      background: var(--charcoal-lt);
+    }
+    .product-card:hover img { transform: scale(1.08); }
+
+    .product-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 24px;
+      transition: background 0.4s;
+    }
+    .product-card:hover .product-overlay {
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%);
+    }
+
+    .product-tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 30px;
+      padding: 4px 14px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+    .product-name {
+      font-family: var(--font-title);
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .product-desc {
+      font-size: 0.82rem;
+      color: var(--white-dim);
+      margin-bottom: 16px;
+      display: none;
+    }
+    .product-card:hover .product-desc { display: block; }
+
+    .product-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201,168,76,0.4);
+      padding-bottom: 2px;
+      width: fit-content;
+      transition: gap 0.3s;
+    }
+    .product-card:hover .product-cta { gap: 14px; }
+
+    /* ========================
+       ABOUT SECTION
+    ======================== */
+    #about {
+      padding: 90px 0;
+      background: var(--charcoal-mid);
+      position: relative; overflow: hidden;
+    }
+    #about::after {
+      content: '"';
+      position: absolute;
+      font-family: var(--font-title);
+      font-size: clamp(200px, 40vw, 380px);
+      font-weight: 900;
+      color: rgba(201,168,76,0.03);
+      right: -30px; top: -40px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .about-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .about-text { position: relative; z-index: 1; }
+    .about-body {
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      color: var(--white-dim);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .about-highlight {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3.5vw, 1.65rem);
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.5;
+      border-left: 3px solid var(--gold);
+      padding-left: 20px;
+      margin: 28px 0;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .about-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.84rem; font-weight: 500;
+      color: var(--white-dim);
+    }
+    .about-feature i { color: var(--gold); font-size: 0.9rem; flex-shrink: 0; }
+
+    .about-visual {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .about-img-wrap {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .about-img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.1), transparent);
+    }
+    .about-badge-card {
+      position: absolute;
+      bottom: -20px; left: -14px;
+      background: linear-gradient(135deg, var(--gold-dk), var(--gold));
+      color: var(--black);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-deep);
+      font-weight: 700;
+    }
+    .badge-num {
+      font-family: var(--font-title);
+      font-size: 2rem; line-height: 1;
+    }
+    .badge-text { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+
+    /* ========================
+       INSTAGRAM SECTION
+    ======================== */
+    #instagram {
+      padding: 90px 0;
+      background: var(--black);
+    }
+    .insta-header { text-align: center; margin-bottom: 48px; }
+    .insta-handle {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--white-dim);
+      margin-top: 10px;
+    }
+    .insta-handle i { color: #E1306C; }
+
+    .insta-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .insta-tile {
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--charcoal-lt);
+      position: relative;
+      cursor: pointer;
+    }
+    .insta-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .insta-tile:hover img { transform: scale(1.1); }
+    .insta-tile-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .insta-tile:hover .insta-tile-overlay {
+      background: rgba(0,0,0,0.5);
+    }
+    .insta-tile-overlay i {
+      font-size: 2rem; color: #fff; opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .insta-tile:hover .insta-tile-overlay i { opacity: 1; }
+
+    .insta-tile.large { grid-column: span 2; aspect-ratio: 2/1; }
+
+    .insta-cta { text-align: center; }
+
+    /* ========================
+       CONTACT SECTION
+    ======================== */
+    #contact {
+      padding: 90px 0;
+      background: var(--charcoal);
+      position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .contact-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .contact-info { }
+
+    .contact-ways {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .contact-btn-row {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .contact-btn-row .btn { flex: 1; min-width: 140px; }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px;
+      background: var(--charcoal-lt);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+    }
+    .contact-detail i { color: var(--gold); font-size: 1.1rem; width: 20px; text-align: center; }
+    .contact-detail-text { font-size: 0.88rem; color: var(--white-dim); }
+    .contact-detail-text strong { color: var(--white); display: block; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+
+    /* Form */
+    .contact-form-wrap {
+      background: var(--charcoal-lt);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+    }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .form-row { margin-bottom: 18px; }
+    .form-row label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      appearance: none;
+    }
+    .form-row input::placeholder,
+    .form-row textarea::placeholder { color: rgba(245,240,234,0.3); }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .form-row textarea { resize: vertical; min-height: 120px; }
+    .form-row select { cursor: pointer; }
+    .form-row select option { background: var(--charcoal-mid); color: var(--white); }
+
+    .form-submit { width: 100%; margin-top: 8px; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+    }
+
+    /* ========================
+       FOOTER
+    ======================== */
+    footer {
+      background: var(--black);
+      padding: 60px 0 30px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: var(--white); font-weight: 300; }
+    .footer-tagline {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--white-dim);
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .footer-col-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 0.84rem;
+      color: var(--white-dim);
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-social {
+      display: flex; gap: 16px;
+    }
+    .social-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--charcoal-lt);
+      border: 1px solid var(--glass-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white-dim);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .social-icon:hover {
+      background: rgba(201,168,76,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-size: 0.76rem;
+      color: rgba(245,240,234,0.35);
+    }
+    .footer-bottom .gold-text { color: var(--gold); }
+
+    /* ========================
+       FLOATING WHATSAPP
+    ======================== */
+    #wa-float {
+      position: fixed;
+      bottom: 24px; right: 20px;
+      z-index: 800;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #075e54, #25d366);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    #wa-float:hover {
+      transform: scale(1.1) translateY(-3px);
+      box-shadow: 0 10px 32px rgba(37,211,102,0.55);
+    }
+    #wa-float::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.4);
+      animation: ripple 2s ease-out infinite;
+    }
+    @keyframes ripple {
+      0%  { transform: scale(1); opacity: 0.7; }
+      100%{ transform: scale(2); opacity: 0; }
+    }
+
+    /* ========================
+       TABLET & DESKTOP QUERIES
+    ======================== */
+    @media (min-width: 600px) {
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .product-desc { display: block; }
+      .insta-preview { grid-template-columns: repeat(3, 1fr); }
+      .insta-tile.large { grid-column: span 1; aspect-ratio: 1; }
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .nav-cta  { display: block; }
+      .hamburger { display: none; }
+
+      .about-inner {
+        flex-direction: row;
+        align-items: center;
+      }
+      .about-text { flex: 1; }
+      .about-visual { flex: 1; margin-top: 30px; }
+
+      .contact-inner { flex-direction: row; }
+      .contact-info  { flex: 1; }
+      .contact-form-wrap { flex: 1; }
+
+      .footer-inner { flex-direction: row; flex-wrap: wrap; gap: 32px; }
+      .footer-brand { flex: 1 1 200px; }
+      .footer-cols  { flex: 2 1 400px; grid-template-columns: repeat(3, 1fr); }
+
+      .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+
+    @media (min-width: 1024px) {
+      .benefits-grid { grid-template-columns: repeat(3, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .insta-preview { grid-template-columns: repeat(4, 1fr); }
+      .insta-tile.large { grid-column: span 2; aspect-ratio: 2/1; }
+    }
+
+    @media (min-width: 1280px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================== LOADER ======================== -->
+<div id="loader">
+  <div class="loader-logo">Smart Frameworks</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- ======================== FLOATING WHATSAPP ======================== -->
+<a id="wa-float" href="https://wa.me/919999999999?text=Hello%20Smart%20Frameworks!%20I%20am%20interested%20in%20your%20granite%20frames." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">Smart<span>Frameworks</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#instagram">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="tel:+919999999999" class="btn btn-gold nav-cta" style="padding:12px 24px;font-size:0.82rem;min-height:42px;">
+      <i class="fas fa-phone-alt"></i> Call Now
+    </a>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ======================== MOBILE MENU ======================== -->
+<div id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+  <a href="#benefits"  class="menu-link">Benefits</a>
+  <a href="#products"  class="menu-link">Products</a>
+  <a href="#about"     class="menu-link">About</a>
+  <a href="#instagram" class="menu-link">Gallery</a>
+  <a href="#contact"   class="menu-link">Contact</a>
+  <div class="menu-social">
+    <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://wa.me/919999999999" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+919999999999" aria-label="Call"><i class="fas fa-phone-alt"></i></a>
+  </div>
+</div>
+
+<!-- ======================== HERO ======================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-accent"></div>
+
+  <div class="container hero-content">
+    <div class="hero-badge reveal">
+      <i class="fas fa-gem"></i>
+      Hyderabad's Premier Granite Frame Specialist
+    </div>
+
+    <h1 class="hero-h1 reveal reveal-delay-1">
+      Premium<br>
+      <span class="line-gold">Granite Door</span>
+      Frames
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">Strong. Elegant. Permanent.</p>
+
+    <div class="hero-cta-group reveal reveal-delay-3">
+      <a href="tel:+919999999999" class="btn btn-gold">
+        <i class="fas fa-phone-alt"></i> Call Now
+      </a>
+      <a href="https://wa.me/919999999999?text=Hello%20Smart%20Frameworks!%20I%20am%20interested%20in%20your%20premium%20granite%20frames." target="_blank" rel="noopener" class="btn btn-green">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" class="btn btn-insta">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+    </div>
+
+    <div class="hero-stats reveal reveal-delay-4">
+      <div class="stat-item">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Projects Done</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Premium Quality</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ======================== BENEFITS ======================== -->
+<section id="benefits">
+  <div class="container">
+    <div class="benefits-header">
+      <p class="section-label reveal">Why Granite Frames?</p>
+      <h2 class="section-title reveal reveal-delay-1">Built to <span class="gold-span">Last Generations</span></h2>
+      <div class="gold-divider reveal reveal-delay-2"></div>
+      <p style="color:var(--white-dim);font-size:0.92rem;max-width:520px;" class="reveal reveal-delay-2">
+        Every Smart Frameworks granite frame is engineered to exceed the standards of modern luxury construction — combining natural stone beauty with unmatched durability.
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon"><i class="fas fa-tint-slash"></i></div>
+        <div class="benefit-title">100% Waterproof</div>
+        <div class="benefit-desc">Non-porous granite surface repels water completely — no swelling, no warping, no water damage. Ideal for bathrooms, kitchens, and exteriors.</div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-1">
+        <div class="benefit-icon"><i class="fas fa-bug-slash"></i></div>
+        <div class="benefit-title">Termite Proof</div>
+        <div class="benefit-desc">Unlike wood, granite offers zero entry points for termites or insects. Protect your home permanently without chemical treatments.</div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-2">
+        <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="benefit-title">Crack Resistant</div>
+        <div class="benefit-desc">High-density natural stone stands firm against thermal expansion, seasonal shifts, and structural movement — no hairline cracks over time.</div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-3">
+        <div class="benefit-icon"><i class="fas fa-tools"></i></div>
+        <div class="benefit-title">Low Maintenance</div>
+        <div class="benefit-desc">A simple wipe is all it takes. No painting, no polishing, no repairs. Granite frames stay pristine with virtually zero upkeep for decades.</div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-4">
+        <div class="benefit-icon"><i class="fas fa-gem"></i></div>
+        <div class="benefit-title">Premium Finish</div>
+        <div class="benefit-desc">Natural stone textures and high-polish finishes lend an unmistakable luxury aesthetic that elevates any architectural style — traditional or contemporary.</div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-5">
+        <div class="benefit-icon"><i class="fas fa-infinity"></i></div>
+        <div class="benefit-title">Lifetime Durability</div>
+        <div class="benefit-desc">Granite is one of the hardest natural materials on earth. Invest once — enjoy for a lifetime. Your frames will outlast the building itself.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PRODUCTS ======================== -->
+<section id="products">
+  <div class="container">
+    <div class="products-header">
+      <p class="section-label reveal">Our Collections</p>
+      <h2 class="section-title reveal reveal-delay-1">Granite Frame <span class="gold-span">Mastery</span></h2>
+      <div class="gold-divider reveal reveal-delay-2"></div>
+      <p style="color:var(--white-dim);font-size:0.92rem;max-width:520px;" class="reveal reveal-delay-2">
+        From grand entrance doors to delicate window sills — every Smart Frameworks product is precision-cut, hand-finished, and installed to perfection.
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-2.webp" alt="Main Door Frames – Coal Black Granite" loading="lazy" />
+        <div class="product-overlay">
+          <span class="product-tag">Signature</span>
+          <div class="product-name">Main Door Frames</div>
+          <div class="product-desc">Grand entrance frames in black, grey, and exotic granite varieties. Make a statement from the moment guests arrive.</div>
+          <a href="#contact" class="product-cta">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-1">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-13.webp" alt="Bathroom Frames – Glossy Beige Granite" loading="lazy" />
+        <div class="product-overlay">
+          <span class="product-tag">Waterproof</span>
+          <div class="product-name">Bathroom Frames</div>
+          <div class="product-desc">Moisture-proof, slip-resistant, and elegantly finished for bathrooms and wet zones that demand both function and style.</div>
+          <a href="#contact" class="product-cta">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-2">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-16.jpg" alt="Window Frames – Solid White Granite" loading="lazy" />
+        <div class="product-overlay">
+          <span class="product-tag">Precision-Cut</span>
+          <div class="product-name">Window Frames</div>
+          <div class="product-desc">Slim-profile granite window surrounds that frame your views beautifully while standing firm against weather and time.</div>
+          <a href="#contact" class="product-cta">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="product-card reveal reveal-delay-3">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-4.webp" alt="Custom Granite Frames – Polished Copper Brown" loading="lazy" />
+        <div class="product-overlay">
+          <span class="product-tag">Bespoke</span>
+          <div class="product-name">Custom Granite Frames</div>
+          <div class="product-desc">Unique dimensions, rare stone varieties, and custom profiles — fully tailored to your architect's specifications and your personal vision.</div>
+          <a href="#contact" class="product-cta">Enquire Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Hyderabad's Most <span class="gold-span">Trusted</span> Granite Frame Brand</h2>
+        <div class="gold-divider reveal reveal-delay-2"></div>
+
+        <p class="about-body reveal reveal-delay-2">
+          Smart Frameworks was built on a single conviction: that the frames surrounding your doors and windows deserve the same attention to quality and beauty as everything inside your home. We bring the permanence of natural granite into modern architecture — giving builders, architects, and homeowners a material that truly lasts.
+        </p>
+
+        <blockquote class="about-highlight reveal reveal-delay-3">
+          "We don't just frame your doors — we frame your legacy."
+        </blockquote>
+
+        <p class="about-body reveal reveal-delay-3">
+          Based in Hyderabad, we supply premium granite door and window frames across Telangana and Andhra Pradesh. Each piece is sourced from the finest quarries, precision-cut by master craftsmen, and installed by our trained team — ensuring flawless results on every project, from luxury villas to high-rise apartments.
+        </p>
+
+        <div class="about-features reveal reveal-delay-4">
+          <div class="about-feature"><i class="fas fa-check-circle"></i> Expert Installation</div>
+          <div class="about-feature"><i class="fas fa-check-circle"></i> Premium Stone Sourcing</div>
+          <div class="about-feature"><i class="fas fa-check-circle"></i> Custom Sizing</div>
+          <div class="about-feature"><i class="fas fa-check-circle"></i> On-site Consultation</div>
+          <div class="about-feature"><i class="fas fa-check-circle"></i> Pan-Hyderabad Delivery</div>
+          <div class="about-feature"><i class="fas fa-check-circle"></i> Quality Guaranteed</div>
+        </div>
+      </div>
+
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="about-img-wrap" style="position:relative;">
+          <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/granite-door-frame-product-image.png" alt="Smart Frameworks granite door frame craftsmanship" loading="lazy" />
+          <div class="about-badge-card">
+            <div class="badge-num">500+</div>
+            <div class="badge-text">Premium Projects<br>Completed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== INSTAGRAM ======================== -->
+<section id="instagram">
+  <div class="container">
+    <div class="insta-header">
+      <p class="section-label reveal">Follow Our Work</p>
+      <h2 class="section-title reveal reveal-delay-1">Live From <span class="gold-span">Our Feed</span></h2>
+      <div class="gold-divider reveal reveal-delay-2" style="margin:14px auto 16px;"></div>
+      <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" class="insta-handle reveal reveal-delay-2">
+        <i class="fab fa-instagram"></i> @smartframeworks7
+      </a>
+    </div>
+
+    <div class="insta-preview">
+      <div class="insta-tile large reveal">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-8.webp" alt="Jade Black Graphite granite door frame" loading="lazy" />
+        <div class="insta-tile-overlay"><i class="fab fa-instagram"></i></div>
+      </div>
+      <div class="insta-tile reveal reveal-delay-1">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-11.webp" alt="Walnut Brown granite door frame" loading="lazy" />
+        <div class="insta-tile-overlay"><i class="fab fa-instagram"></i></div>
+      </div>
+      <div class="insta-tile reveal reveal-delay-2">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-18.jpg" alt="White granite door frame" loading="lazy" />
+        <div class="insta-tile-overlay"><i class="fab fa-instagram"></i></div>
+      </div>
+      <div class="insta-tile reveal reveal-delay-3">
+        <img src="https://granitedoorframe.com/wp-content/uploads/2024/09/stone-19.jpg" alt="Cream granite door frame" loading="lazy" />
+        <div class="insta-tile-overlay"><i class="fab fa-instagram"></i></div>
+      </div>
+    </div>
+
+    <div class="insta-cta reveal">
+      <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" class="btn btn-insta">
+        <i class="fab fa-instagram"></i> See All Our Projects on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <p class="section-label reveal">Get In Touch</p>
+        <h2 class="section-title reveal reveal-delay-1">Let's Build<br><span class="gold-span">Something Lasting</span></h2>
+        <div class="gold-divider reveal reveal-delay-2"></div>
+        <p style="color:var(--white-dim);font-size:0.92rem;margin-bottom:8px;" class="reveal reveal-delay-2">
+          Ready to elevate your construction with premium granite frames? Reach out for a free site visit and quote in Hyderabad.
+        </p>
+
+        <div class="contact-ways reveal reveal-delay-3">
+          <div class="contact-btn-row">
+            <a href="tel:+919999999999" class="btn btn-gold">
+              <i class="fas fa-phone-alt"></i> Call Now
+            </a>
+            <a href="https://wa.me/919999999999?text=Hello%20Smart%20Frameworks!%20I%20need%20a%20quote%20for%20granite%20frames." target="_blank" rel="noopener" class="btn btn-green">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+          <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" class="btn btn-insta" style="width:100%;">
+            <i class="fab fa-instagram"></i> Message on Instagram
+          </a>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:28px;">
+          <div class="contact-detail reveal reveal-delay-4">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="contact-detail-text">
+              <strong>Location</strong>
+              Hyderabad, Telangana, India
+            </div>
+          </div>
+          <div class="contact-detail reveal reveal-delay-4">
+            <i class="fas fa-clock"></i>
+            <div class="contact-detail-text">
+              <strong>Business Hours</strong>
+              Mon–Sat: 9:00 AM – 7:00 PM
+            </div>
+          </div>
+          <div class="contact-detail reveal reveal-delay-5">
+            <i class="fab fa-instagram"></i>
+            <div class="contact-detail-text">
+              <strong>Instagram</strong>
+              @smartframeworks7
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form-wrap reveal reveal-delay-2">
+        <div class="form-title">Request a Free Quote</div>
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <label for="f-name">Your Name</label>
+            <input type="text" id="f-name" name="name" placeholder="e.g. Rahul Sharma" required />
+          </div>
+          <div class="form-row">
+            <label for="f-phone">Phone / WhatsApp</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="+91 98765 43210" required />
+          </div>
+          <div class="form-row">
+            <label for="f-type">Frame Type</label>
+            <select id="f-type" name="type">
+              <option value="">Select product type...</option>
+              <option>Main Door Frames</option>
+              <option>Bathroom Door Frames</option>
+              <option>Window Frames</option>
+              <option>Custom Granite Frames</option>
+              <option>Multiple / Bulk Order</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" placeholder="Tell us about your project — location, dimensions, quantity..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold form-submit">
+            <i class="fas fa-paper-plane"></i> Send Enquiry
+          </button>
+        </form>
+        <div class="form-success" id="form-success">
+          <i class="fas fa-check-circle" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
+          Thank you! We'll contact you within 24 hours.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Smart<span>Frameworks</span></div>
+        <p class="footer-tagline">Premium Granite Door & Window Frames<br>Hyderabad, Telangana</p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="tel:+919999999999" class="social-icon" aria-label="Phone"><i class="fas fa-phone-alt"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Products</div>
+          <ul>
+            <li><a href="#products">Main Door Frames</a></li>
+            <li><a href="#products">Bathroom Frames</a></li>
+            <li><a href="#products">Window Frames</a></li>
+            <li><a href="#products">Custom Frames</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#benefits">Why Granite</a></li>
+            <li><a href="#instagram">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Reach Us</div>
+          <ul>
+            <li><a href="tel:+919999999999"><i class="fas fa-phone-alt" style="color:var(--gold);margin-right:6px;"></i>Call Now</a></li>
+            <li><a href="https://wa.me/919999999999" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="color:var(--gold);margin-right:6px;"></i>WhatsApp</a></li>
+            <li><a href="https://www.instagram.com/smartframeworks7/" target="_blank" rel="noopener"><i class="fab fa-instagram" style="color:var(--gold);margin-right:6px;"></i>Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 <span class="gold-text">Smart Frameworks</span>. All rights reserved. Hyderabad, Telangana.</p>
+      <p>Crafted with <span class="gold-text">♦</span> for Premium Construction</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================== JAVASCRIPT ======================== -->
+<script>
+(function () {
+  'use strict';
+
+  /* ----- LOADER ----- */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      document.getElementById('loader').classList.add('hidden');
+      document.getElementById('hero').classList.add('loaded');
+      // trigger hero animations
+      document.querySelectorAll('#hero .reveal').forEach(function (el, i) {
+        setTimeout(function () { el.classList.add('visible'); }, i * 120 + 200);
+      });
+    }, 1800);
+  });
+
+  /* ----- NAVBAR SCROLL ----- */
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function () {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ----- HAMBURGER ----- */
+  var hamburgerBtn = document.getElementById('hamburger-btn');
+  var mobileMenu   = document.getElementById('mobile-menu');
+
+  function toggleMenu(open) {
+    hamburgerBtn.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburgerBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburgerBtn.addEventListener('click', function () {
+    toggleMenu(!mobileMenu.classList.contains('open'));
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () { toggleMenu(false); });
+  });
+
+  /* ----- SCROLL REVEAL ----- */
+  var revealEls = document.querySelectorAll('.reveal');
+  var observer  = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(function (el) {
+    // skip hero — handled after loader
+    if (!el.closest('#hero')) observer.observe(el);
+  });
+
+  /* ----- CONTACT FORM ----- */
+  var contactForm = document.getElementById('contact-form');
+  var formSuccess = document.getElementById('form-success');
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name  = document.getElementById('f-name').value.trim();
+    var phone = document.getElementById('f-phone').value.trim();
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+    // Build WhatsApp message
+    var type = document.getElementById('f-type').value || 'General Enquiry';
+    var msg  = document.getElementById('f-msg').value.trim();
+    var wa   = 'https://wa.me/919999999999?text=' + encodeURIComponent(
+      'Hello Smart Frameworks!\n\nName: ' + name +
+      '\nPhone: ' + phone +
+      '\nProduct: ' + type +
+      (msg ? '\nMessage: ' + msg : '')
+    );
+    window.open(wa, '_blank', 'noopener');
+    contactForm.style.display = 'none';
+    formSuccess.style.display = 'block';
+  });
+
+  /* ----- PARALLAX HERO (desktop only) ----- */
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    var heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', function () {
+      var s = window.scrollY;
+      if (s < window.innerHeight) {
+        heroBg.style.transform = 'scale(1) translateY(' + (s * 0.22) + 'px)';
+      }
+    }, { passive: true });
+  }
+
+  /* ----- SMOOTH ANCHOR SCROLL (Safari fallback) ----- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.scrollY - 68;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
